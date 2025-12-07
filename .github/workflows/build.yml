@@ -19,7 +19,6 @@ env:
   IMAGE_LOGO_URL: "https://avatars.githubusercontent.com/u/120078124?s=200&v=4"  # Put your own image here for a fancy profile on https://artifacthub.io/!
   IMAGE_NAME: "${{ github.event.repository.name }}"  # output image name, usually same as repo name
   IMAGE_REGISTRY: "ghcr.io/${{ github.repository_owner }}"  # do not edit
-  DEFAULT_TAG: "latest"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-${{ inputs.brand_name}}-${{ inputs.stream_name }}
@@ -38,6 +37,14 @@ jobs:
     steps:
       - name: Prepare environment
         run: |
+          if [[ $GITHUB_REF_NAME == 'main' ]]; then
+            echo "DEFAULT_TAG="unstable" >> $(GITHUB_ENV)
+          elif [[ $GITHUB_REF_NAME == 'develop' ]]; then
+            echo "DEFAULT_TAG="latest" >> $(GITHUB_ENV)
+          else
+            echo "DEFAULT_TAG="unstable" >> $(GITHUB_ENV)
+          fi
+
           # Lowercase the image uri
           echo "IMAGE_REGISTRY=${IMAGE_REGISTRY,,}" >> ${GITHUB_ENV}
           echo "IMAGE_NAME=${IMAGE_NAME,,}" >> ${GITHUB_ENV}
