@@ -38,11 +38,11 @@ jobs:
       - name: Prepare environment
         run: |
           if [[ $GITHUB_REF_NAME == 'main' ]]; then
-            echo "DEFAULT_TAG='stable'" >> ${GITHUB_ENV}
+            echo "DEFAULT_TAG=\"stable\"" >> ${GITHUB_ENV}
           elif [[ $GITHUB_REF_NAME == 'develop' ]]; then
-            echo "DEFAULT_TAG='latest'" >> ${GITHUB_ENV}
+            echo "DEFAULT_TAG=\"latest\"" >> ${GITHUB_ENV}
           else
-            echo "DEFAULT_TAG='unstable'" >> ${GITHUB_ENV}
+            echo "DEFAULT_TAG=\"unstable\"" >> ${GITHUB_ENV}
           fi
 
           # Lowercase the image uri
