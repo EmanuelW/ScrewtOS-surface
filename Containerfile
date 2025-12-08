@@ -43,6 +43,7 @@ ARG BASE_IMAGE_NAME="${BASE_IMAGE_NAME:-kinoite}"
 ARG SHA_HEAD_SHORT="${SHA_HEAD_SHORT}"
 ARG VERSION_TAG="${VERSION_TAG}"
 ARG VERSION_PRETTY="${VERSION_PRETTY}"
+ARG DEFAULT_TAG="${DEFAULT_TAG}"
 
 # Setup Copr repos
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
